@@ -1,0 +1,19 @@
+public class polynomial {
+    public static void main(String[] args){
+
+	//take user input
+	System.out.println("A");
+	int a = IO.readInt();
+	System.out.println("B");
+	int b = IO.readInt();
+	System.out.println("C");
+	int c = IO.readInt();
+
+	//(x-a)(x-b)(x-c)
+	//(x^2-abx-ab)(x-c)
+	//(x^3-abx^2-abx-cx^2+abcx+abc)
+	System.out.println("x^3" + "" + "" + "" + "" + " " a*b*c);
+	
+
+    }
+}

@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+    <head>
+    <script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-35700245-1']);
+	      _gaq.push(['_trackPageview']);
+
+	        (function() {
+		     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			       })();
+
+		       </script>
+    {% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <link rel="apple-touch-icon" href="/static/images/ios_icon.png" />
+    <link rel="shortcut icon" href="/static/images/favicon.ico" />
+    <link rel="stylesheet" href="/static/stylesheets/foundation.min.css">
+    <title>GetGoing</title>
+    {% endblock %}
+  </head>
+<body onload="initGeo();">
+  <div id="content">
+    <div class="row">
+      <div class="nine columns centered">
+        <div class="panel">
+            <div class="eleven columns centered">
+                <h1><a href="/">/GET/Going</a></h1>
+                <h5 class="subhead">NextBus++</h5>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="seven columns centered">
+            <div class="panel">
+                <form name="searchForm" action="/search" method="GET">
+                    <input type="text" name="latitude" id="latitude" placeholder="Latitude" readonly="readonly">
+                    <input type="text" name="longitude" id="longitude" placeholder="Longitude" readonly="readonly">
+                    <!---<input type="text" placeholder="Where are you?" name="start" id="start">-->    
+                    <!-- <input type="text" placeholder="Where are you going?" name="destination" id="destination">  -->
+                    <input type="text" placeholder="Where are you going?" autocomplete="off" name="destination" id="destination"/>
+                    <!--<input type="time" placeholder="What time do you have to be there?" id="when">
+                    <label for="checkbox1">
+                        <input type="checkbox" id="checkbox1">
+                        <span class="custom checkbox"></span> Text Me a Reminder!
+                    </label>-->
+                    <input type="submit" class="large success button" text="/GET/"></input>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div id="footer">
+    {% block footer %}
+    <div class="five columns centered">
+      <div class="panel">
+        <div class="five columns centered">by Lavi & <a href="http://indraneelpurohit.com">Indraneel</a>.</div>
+      </div>
+    </div>
+    {% endblock %}
+  </div>
+  <!-- <script src="/static/javascripts/app.js"></script>
+  <script src="/static/javascripts/foundation.min.js"></script>
+  <script src="/static/javascripts/jquery.foundation.accordion.js"></script>
+  <script src="/static/javascripts/jquery.foundation.alerts.js"></script>
+  <script src="/static/javascripts/jquery.foundation.buttons.js"></script>
+  <script src="/static/javascripts/jquery.foundation.forms.js"></script>
+  <script src="/static/javascripts/jquery.foundation.mediaQueryToggle.js"></script>
+  <script src="/static/javascripts/jquery.foundation.navigation.js"></script>
+  <script src="/static/javascripts/jquery.foundation.orbit.js"></script>
+  <script src="/static/javascripts/jquery.foundation.reveal.js"></script>
+  <script src="/static/javascripts/jquery.foundation.tabs.js"></script>
+  <script src="/static/javascripts/jquery.foundation.tooltips.js"></script>
+  <script src="/static/javascripts/jquery.foundation.topbar.js"></script>
+  <script src="/static/javascripts/jquery.placeholder.js"></script>
+  <script src="/static/javascripts/modernizr.foundation.js"></script> 
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> -->
+  <script src="/static/javascripts/jquery.js"></script>
+  <script src="/static/javascripts/jquery.smart_autocomplete.js"></script>
+  <!-- <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script> -->
+  <script>
+    function initGeo(){
+        if ( navigator.geolocation ){
+            navigator.geolocation.getCurrentPosition( success, fail );
+        }
+        else {
+            alert ("Your browser does not support geolocation or you denied us access to it!")
+        }
+    }
+
+    function success(position){
+        // alert("it's working");
+        // x = ""+position.coords.latitude+"";
+        $('#latitude').val(position.coords.latitude);
+        // alert($('#latitude'));
+
+        $('#longitude').val(position.coords.longitude);
+        // alert($('#longitude'));
+    }
+
+    function fail(){
+        alert("Error! Coordinates not found.");
+    }
+  </script>
+  <script>
+    $(function() {
+        var availableStops = [
+            "Scott Hall",
+            "Student Activities Center",
+            "Visitor Center",
+            "Stadium",
+            "Werblin Back Entrance",
+            "Hill Center",
+            "Science Building",
+            "Library of Science",
+            "Busch Suites",
+            "Busch Campus Center",
+            "Buell Apartments",
+            "Werblin Main Entrance",
+            "Rutgers Student Center",
+            "Quads",
+            "Livingston Plaza",
+            "Livingston Student Center",
+            "Allison Road Classrooms",
+            "Train Station",
+            "Paterson Street",
+            "Rockoff Hall",
+            "Public Safety Building South",
+            "Cabaret Theatre",
+            "Red Oak Lane",
+            "Lipman Hall",
+            "Food Sciences Building",
+            "Biel Road",
+            "Henderson",
+            "Katzenbach",
+            "Gibbons",
+            "College Hall",
+            "Public Safety Building North",
+            "Liberty Street",
+            "Zimmerli Arts Museum",
+            "Davidson Hall",
+            "Bravo Supermarket",
+            "Nursing School",
+            "Colony House"];
+        $('#destination').smartAutoComplete({source: availableStops, typeAhead: true, maxResults: 1, minCharLimit: 1, resultsContainer: false });
+    });
+  </script>
+  <script>
+    // $(function() {
+    //     function log( message ) {
+    //         $( "<div/>" ).text( message ).prependTo( "#log" );
+    //         $( "#log" ).attr( "scrollTop", 0 );
+    //     }
+ 
+    //     $.ajax({
+    //         url: "/static/maps.xml",
+    //         dataType: "xml",
+    //         success: function( xmlResponse ) {
+    //             alert("XML IS PARSE");
+    //             var data = $( "maps", xmlResponse ).map(function() {
+    //                 return {
+    //                     place: $( "place", this ).text(),
+    //                     campus: $( "campus", this ).text()
+    //                 };
+    //                 alert(data);
+    //             }).get();
+    //             $( "#start" ).autocomplete({
+    //                 source: data,
+    //                 minLength: 0,
+    //                 select: function( event, ui ) {
+    //                     log( ui.item ?
+    //                         "Selected: " + ui.item.value + ", geonameId: " + ui.item.id :
+    //                         "Nothing selected, input was " + this.value );
+    //                 }
+    //             });
+    //         }
+    //     });
+    // });
+    </script>
+   <script>
+    // $(document).ready(function() {
+    //     var myArr = [];
+
+    //     function parseXML(){
+    //         //find every query value
+    //         alert("it's working!");
+    //         $.get("/static/mapz.xml", {}, function(xml){
+    //             $('maps', xml).each(function(i) {
+    //                 myArr.push($(this).find("place").text());
+    //             })
+    //         });
+    //         // $(xml).find("maps").each(function()
+    //         // {
+    //         // });
+    //     }
+
+    //     function setupAC(){
+    //         $('input#start').autocomplete({
+    //             source: myArr,
+    //             minLength: 1,
+    //             select: function(event, ui) {
+    //                 $("input#start").val(ui.item.value);
+    //                 $("#searchForm").submit();
+    //             }
+    //         });
+    //     }
+    //     $.ajax({
+    //         type: "GET",
+    //         url: "/static/maps.xml",
+    //         dataType: "xml",
+    //         success: parseXML,
+    //         complete: setupAC,
+    //         failure: function(data) {
+    //             alert("XML File could not be found.");
+    //         }
+    //     });
+    // });
+   </script>
+</body>

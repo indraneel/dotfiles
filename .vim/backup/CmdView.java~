@@ -1,0 +1,304 @@
+package cs213.photoalbum.simpleview;
+
+import java.util.*;
+
+import cs213.photoalbum.control.Control;
+import cs213.photoalbum.model.User;
+import cs213.photoalbum.model.Backend;
+
+/**
+ * Implements the simple, text-only interface for the Photo Library application
+ * Handles input entry and validation.
+ * Handles output. 
+ * @author Indraneel Purohit
+ */
+
+public class CmdView implements View{
+	/**
+	 * Main Method
+	 * @param args - Arguments passed from command line
+	 */
+	
+	static cs213.photoalbum.control.Control controller;
+	static cs213.photoalbum.model.Backend backend;
+	static boolean loggedIn = false;
+	static cs213.photoalbum.model.User currentUser;
+	static Scanner sc = new Scanner(System.in);
+	static ArrayList<User> list; 
+
+	public static void main(String[] args){
+		
+		if (args[1] == null || args.length > 1){
+			System.err.println("Error: invalid input for CmdView.");
+			return;
+		}
+		
+		String userID;
+		if(args[0].equals("login")){
+		    userID = args[1];
+		    if(login(userID)){
+			inputLoop();
+			return;
+		    }
+		    else {
+			return;
+		    }
+		}
+		commandViewHandler(args);
+		return;
+	}
+
+	private static void commandViewHandler(String[] args){
+		//list users
+		if (args[0].equals("listusers")){
+			//need a method to do this in controller!
+		}
+		
+		//add new user
+		else if (args[0].equals("adduser")){
+			String userID, username = null;
+			
+			if (args.length < 3){
+				//exception
+			}
+					
+			userID = args[1];
+			if (args[2].charAt(0) != '"'){
+				//exception
+			}
+			
+			int i = 2;
+			while (args[i].charAt(args[i].length()-1) != '"'){
+				username += args[i];
+				i++;
+			}
+			username += args[i];
+			
+			if (controller.addUser(userID, username)){
+				System.out.println("created user <" + userID + "> with name " + username);
+				return;
+			}
+			else {
+				//error
+				System.out.println("user <" + userID + "> already exists with name " + username);
+			}
+		}
+		
+		//delete a user
+		else if (args[0].equals("deleteuser")){
+			String userID;
+			
+			if (args.length != 2){
+				//exception
+			}
+					
+			userID = args[1];
+			
+			if (controller.removeUser(userID)){
+				System.out.println("deleted user <" + userID + ">");
+				return;
+			}
+			else {
+				//error
+				System.out.println("user <" + userID + "> does not exist");
+				return;
+			}
+			
+		}
+		
+		//exception?
+		else {
+		    System.err.println("You have entered an invalid input.");
+		}
+	}
+		
+	private static void inputLoop(){
+	    String input = null;
+	    while (!(input=sc.nextLine()).equals("logout")){
+		input = input.trim();
+		String op = null;
+		if (input.indexOf(' ') < 0){
+		    op = input; 
+		}
+		else {
+		    op = input.substring(0,input.indexOf(' '));
+		}
+
+		if (op.equals("createAlbum")){
+		    String albumName = input.substring(input.indexOf(' ')+1, input.lastIndexOf(' ').trim();
+		    createAlbum(albumName); 
+		}
+
+		if (op.equals("deleteAlbum")){
+
+		}
+
+		if (op.equals("listAlbums")){
+
+		}
+
+		if (op.equals("listPhotos")){
+
+		}
+
+		if (op.equals("addPhoto")){
+
+		}
+
+		if (op.equals("movePhoto")){
+
+		}
+
+		if (op.equals("removePhoto")){
+
+		}
+
+
+		if (op.equals("addTag")){
+
+		}
+
+		if (op.equals("deleteTag")){
+
+		}
+
+
+		if (op.equals("listPhotoInfo")){
+
+		}
+
+		if (op.equals("getPhotosByDate")){
+
+		}
+		
+		if (op.equals("getPhotosByTag")){
+
+		}
+
+	    }
+
+	    if (input.equals("logout")){
+
+	    }
+	    
+	}
+
+	@Override
+	public boolean listUsers() {
+		// TODO Auto-generated method stub
+		ArrayList<Users> list = backend.getUsers();	
+		return true;
+	}
+
+	@Override
+	public boolean addUser(String userID, String username) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deleteUser(String userID) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean login(String userID) {
+	    if ((currentUser = backend.getUser(userID)) != null){
+		loggedIn = true;
+		return true;
+	    }
+	    else {
+		System.out.println("Error: user " + userID + " does not exist.");
+		return false;
+	    }
+	}
+
+	@Override
+	public boolean createAlbum(String albumName) {
+		// TODO Auto-generated method stub
+		if (controller.addAlbum(albumname, new ArrayList<Photo>){
+		    return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean deleteAlbum(String albumName) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean listAlbums() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean listPhotosInAlbum(String albumName) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean addPhotoToAlbum(String filename, String caption,
+			String albumName) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean movePhotoToAlbum(String filename, String oldAlbumName,
+			String newAlbumName) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean removePhotoFromAlbum(String filename, String albumName) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean addTagToPhoto(String filename, String tagtype,
+			String tagvalue) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deleteTagFromPhoto(String filename, String tagtype,
+			String tagvalue) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean listPhotoInfo(String filename) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean getPhotosByDate(String startDate, String endDate) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean getPhotosByTag(String tagtype, String tagvalue) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean logout() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	
+}
+

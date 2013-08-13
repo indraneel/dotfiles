@@ -1,0 +1,16 @@
+public class StringRec {
+    public static String LongestWord(String input){
+	if (input == null){
+	    return null;
+	}
+	if (input.indexOf(" ") < 0){
+	    return input;
+	}
+	return 
+    }
+
+    public static void main(String[] args){
+	String input = "this";
+	System.out.println(LongestWord(input));
+    }
+}

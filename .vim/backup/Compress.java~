@@ -1,0 +1,78 @@
+public class Compress
+{
+    public static void main(String[] args)
+    {
+        System.out.println("Enter an input string: ");
+        String input = IO.readString(), output="";
+        int counter = 1;
+
+        if (input.length()==1)
+        {
+            output=input;
+        }
+
+        else
+        {
+            for (int i=1; i<=input.length(); i++)
+            {
+                char charRight = input.charAt(i);
+                char charLeft = input.charAt(i-1);
+                System.out.println("the value of i at the top " + i);
+    
+                    if (charRight==charLeft)
+                    {
+                        counter++;
+                        System.out.println("first counter " + counter);
+                        if (i==input.length()-1)
+                        {
+                            if (counter < 2)
+                            {
+                                output = output+charLeft; 
+                                System.out.println("\n if if if output " + output + "\n");
+                            }
+                            else
+                            {
+                                output = output+counter+charLeft;
+                                System.out.println("\n if if else output " + output + "\n");
+                            }
+                            break;
+                        }
+                        continue;
+                    }
+                    else
+                    {
+                        System.out.println("\n second Counter " + counter + "\n");
+                        if (i==input.length()-1)
+                        {
+                            if (counter < 2)
+                            {
+                                output = output+charLeft+charRight;
+                            }
+                            else
+                            {
+                                output = output+counter+charLeft+charRight;
+                            }
+                            System.out.println("\n else if break output " + output + "\n");
+                            break;
+                        }
+    
+                        if (counter < 2)
+                        {
+                            output = output+charLeft;
+                            System.out.println("\n else if output " + output + "\n");
+                        }
+                        else
+                        {
+                            output = output+counter+charLeft;
+                            System.out.println("\nelse else output " + output + "\n");
+                        }
+    
+                        counter=1;
+                    }
+                    System.out.println("the value of i at the bottom " + i);
+            }
+        }
+
+        IO.outputStringAnswer(output);
+    }
+}

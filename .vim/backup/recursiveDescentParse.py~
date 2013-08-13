@@ -1,0 +1,146 @@
+main: {
+    token = next_token()
+    if (program() and token == eof)
+	print 'accept'
+    else
+	print 'error'
+}
+
+bool program:
+    switch token {
+	case program:
+	    token = next_token()
+	    if (not block()) return false
+	    if token == .
+		token = next_token()
+		return true
+	    else
+		return false
+	    break
+	
+	case eof: return true
+	default: return false
+
+    }
+
+bool block:
+    switch token {
+	case begin:
+	    token = next_token()
+	    if (not stmtlist()) return false
+	    if token == end
+		token = next_token()
+		return true
+	    else
+		return false
+	    break;
+	default: return false
+    }
+
+bool stmtlist:
+	    token = next_token()
+	    if (not stmt()) return false
+	    if (not morestmts()) return false
+	    return true 
+bool morestmts:
+    switch token {
+	case ;:
+	    token = netx_token()
+	    if (not stmtlist()) return false
+	    return true
+	case '':
+	    return true
+	default: return false
+    }
+bool stmt:
+	token = next_token()
+	if (not assign()) return false
+	if (not ifstmt()) return false
+	if (not whilestmt()) return false
+	if (not block()) return false
+	return true
+bool assign:
+
+bool ifstmt:
+    if (token != 'if') return false
+    token = next_token()
+    if (not testexpr()) return false
+    token = next_token()
+    if (token != 'then') return false
+    token = next_token()
+    if (not stmt()) return false
+    token = next_token()
+    if (token != 'else') return false
+    token = next_token()
+    if (not stmt()) return false
+    return true
+
+bool whilestmt:
+    if (token != 'while') return false
+    token = next_token()
+    if (not testexpr()) return false
+    token = next_token()
+    if (token != 'do') return false
+    token = next_token()
+    if (not stmt()) return false
+    return true
+
+bool testexpr:
+    return variable() <= expr()
+
+int expr:
+    int val1, val2
+    switch token {
+	case '+'
+	    token = next_token()
+	    val1 = expr()
+	    token = next_token()
+	    val2 = expr()
+	    return val1 + val2
+	case '*'
+	    token = next_token()
+	    val1 = expr()
+	    token = next_token()
+	    val2 = expr()
+	    return val1 * val2
+	case 0
+	    return digit(token)
+	case 1
+	    return digit(token)
+	case 2	
+	    return digit(token)
+	case 'a'
+	    return variable(token)
+	case 'b'
+	    return variable(token)
+	case 'c'
+	    return variable(token)
+	default: return false
+    }
+
+
+char variable:
+    switch token {
+	case 'a':
+	    token = next_token()
+	    return 'a'
+	case 'b'
+	    token = next_token()
+	    return 'b'
+	case 'c'
+	    token = next_token()
+	    return 'c'
+    }
+
+int digit:
+    switch token {
+	case 0:
+	    token = next_token()
+	    return 0
+	case 1:
+	    token = next_token()
+	    return 1
+	case 2:
+	    token = next_token()
+	    return 2
+    }

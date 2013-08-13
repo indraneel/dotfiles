@@ -1,0 +1,133 @@
+$(document).ready(function() {
+// 'celebs' declared in celebs.js.
+count = 1;
+
+console.log("Initializing stream...");
+TB.setLogLevel(TB.DEBUG);
+
+// Initialize some required data to pull streams
+var api_key = "24689112";
+var id;
+function getSessionId () {
+    console.log("getting session id\n");
+    /*$.ajax({
+	type: "GET",
+	url: "/slim/getSessionId.php",
+	data: {}
+    }).done(function(sessionId){
+	id = sessionId; 
+	console.log("id is now " + id);
+	getToken();
+    });*/
+    id = "2_MX4yNDY4OTExMn4xMjcuMC4wLjF-U3VuIE1hciAzMSAxNjo1MzozMSBQRFQgMjAxM34wLjQxNDM1N34";
+
+    getToken();
+}
+
+// var sessionId = "2_MX4yNDQwMTMyMn4xMjcuMC4wLjF-RnJpIE1hciAyOSAxOTo0OToxMyBQRFQgMjAxM34wLjY3NTIwNzJ-"; // TODO move somewhere else
+function getToken(){
+    console.log("attempting to connect: ajax start");
+    console.log("inside" + id);
+    /*$.ajax({
+	type: "GET",
+	url: "/slim/getToken.php",
+	data: {session_id:id}
+    }).done(function(token) {
+	console.log("token" + token);
+	console.log("success in get token!");
+	console.log("connect attempt");
+	session = TB.initSession(id); // TODO check later
+	//if(mainmodule.hasGameStarted() || getNumUsers() >= 4) {
+	    // Can't join at this point
+	//    return;
+	//}
+
+	// TODO see if this works
+	session.addEventListener('sessionConnected', sessionConnectedHandler);
+	session.addEventListener('streamCreated', streamCreatedHandler);
+	session.connect(api_key, token);
+	console.log("session properly connected");
+    });*/
+    var token = "T1==cGFydG5lcl9pZD0yNDY4OTExMiZzZGtfdmVyc2lvbj10YnJ1YnktdGJyYi12MC45MS4yMDExLTAyLTE3JnNpZz05NTVkZTI0NGRlYmVhOTNjMWJjMjFlZTUyYjc4NjQ5MjEwNTFmYTNmOnJvbGU9cHVibGlzaGVyJnNlc3Npb25faWQ9Ml9NWDR5TkRZNE9URXhNbjR4TWpjdU1DNHdMakYtVTNWdUlFMWhjaUF6TVNBeE5qbzFNem96TVNCUVJGUWdNakF4TTM0d0xqUXhORE0xTjM0JmNyZWF0ZV90aW1lPTEzNjQ3NzQwMjAmbm9uY2U9MC45NTc5MTU1NjEzOTIwODIzJmV4cGlyZV90aW1lPTEzNjQ4NjA0MjEmY29ubmVjdGlvbl9kYXRhPQ==";
+    
+	session = TB.initSession(id); // TODO check later
+	session.addEventListener('sessionConnected', sessionConnectedHandler);
+	session.addEventListener('streamCreated', streamCreatedHandler);
+	session.connect(api_key, token);
+	console.log("session properly connected");
+}
+
+//id = 5;
+getSessionId();
+getToken();
+
+/**
+ * Subscribes us to streams already present when we joined.
+ */
+function sessionConnectedHandler(event) {
+    console.log("Connecting to other streams.");
+    var publisher = TB.initPublisher(api_key, 'publisher');
+    session.publish(publisher);
+
+    // Subscribe to streams that were in the session when we connected
+    subscribeToStreams(event.streams);
+}
+
+/**
+ * Alerts us to new people joining in. 
+ */
+function streamCreatedHandler(event) {
+    // Subscribe to any new streams that are created
+    subscribeToStreams(event.streams);
+}
+
+/**
+ * Subscribes us to all the other streams.
+ */
+function subscribeToStreams(streams, idnum) {
+    console.log(streams.length);
+    for (var i = 0; i < streams.length; i++) {
+        // Make sure we don't subscribe to ourself
+        if (streams[i].connection.connectionId === session.connection.connectionId) {
+            console.log("hi");
+            App.init();
+            return;
+        }
+
+        // Grab the div we're storing them in; give them a celebrity.
+//        var div = document.getElementById('video' + idnum);
+//        div.setAttribute('id', 'stream' + streams[i].streamId);
+//       
+console.log("something\n");
+    var div = $('#video0');
+    //div.empty();
+        //var $div = $('video' + idnum);
+        $div.attr('id', 'stream' + streams[i].streamId);
+        //celebs[streams[i].streamId] = getCeleb(celebs);
+        // Subscribe to the stream
+        session.subscribe(streams[i], div.id);
+    }
+}
+
+/**
+ * @return The number of users currently in.
+ */
+function getNumUsers() {
+    return count;
+}
+
+/**
+ * @return The name of the div containing the current user's frame. 
+ */
+function getMyDiv() {
+    for(var i = 0; i < 4; i++) {
+        var $div = $('video' + i);
+        if($div.attr('id') == session.conection.connectionId) {
+            return 'video' + i;
+        }
+    }
+
+    alert('An error occured while looking for this user\'s div.');
+    return null;
+}
+});

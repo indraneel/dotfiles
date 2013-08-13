@@ -1,0 +1,20 @@
+<?php
+
+    include('opentok-php-sdk/OpenTokSDK.php');
+    include('inc/key.php');
+
+    function getToken($id) {
+	    $a = new OpenTokSDK($api_key, $secret);
+	    echo($a->generate_token($id));
+    } 
+
+    $id = $_GET[session_id];
+   // echo("console.log({$session_id})");
+    #$token = getToken($_POST['session_id']);
+
+    $a = new OpenTokSDK($api_key, $secret);
+
+    #$token =$a->generate_token($id);
+    #echo($token);
+    echo($a->generate_token($api_key, $secret);
+?>

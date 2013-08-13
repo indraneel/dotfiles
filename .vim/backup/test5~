@@ -1,0 +1,3 @@
+LOADI r9 #9
+LOADI r10 #8
+SUB r11 r9 r10

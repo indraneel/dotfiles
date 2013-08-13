@@ -1,0 +1,92 @@
+/* Indraneel Purohit */
+/* http://indraneelpurohit.com *?
+/* KPBC Fellows Application  */
+/* A queue, in C */
+
+/* KPBCqueue.c */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "KPBCqueue.h"
+
+intQueuep init_intQueue(int cap){
+    intQueuep outQueue;
+
+    /* malloc enough space for the struct */
+    outQueue = (intQueuep) malloc(sizeof(intQueue));
+    if (!outQueue) {
+	fprintf(stderr, "uh oh, malloc failed!\n");	
+	return(NULL);
+    }
+
+    /* malloc space for the array that stores the queue's data */
+    outQueue->array = (int **) malloc(sizeof(int *) * (cap));  
+
+    if (!outQueue->array){
+	fprintf(stderr, "uh oh, malloc failed!\n");	
+	return(NULL);
+    }
+  
+    outQueue->cap=cap;
+    outQueue->size=0;
+    outQueue->front=1;
+    outQueue->rear=0;
+    return(outQueue);
+}
+
+int enqueue(intQueuep theQueue, int data) {
+    int **temp;
+    int rearTemp;
+
+    if (!data) {
+	fprintf(stderr,"error - there's no data argument\n");
+	return 0;
+    }
+
+    if (!theQueue) {
+	fprintf(stderr,"error - there's no queue\n");
+	return 0;
+    }
+    
+    if ( (theQueue->size + 1) >= theQueue->cap) {
+	fprintf(stderr, "The queue...\n...is full!");
+	return 0;
+    }
+    
+    rearTemp = (int)(theQueue->rear+1) % theQueue->size;
+    theQueue->array[rearTemp] = (int)data;
+
+    theQueue->size++;
+
+    printf("successfully enqueued\n");
+}
+
+void printQueue(intQueuep theQueue){
+    int i;
+
+    if (!theQueue) {
+	fprintf(stderr, "this queue is empty!\n");
+	return;
+    }
+   
+    printf("Beginning of Queue");
+    for (i=0; i<theQueue->size; i++){
+	printf("|%c|",theQueue->array[i]);
+    }
+    printf("End of Queue\n");
+    return;
+}
+
+int main(int argc, char **argv){
+    intQueuep test_queue;
+
+    test_queue = init_intQueue(5);
+    
+    if (!test_queue) {
+	fprintf(stderr, "'oh god' - big sean");	
+	exit(0);
+    }
+
+    return 0;
+}
+

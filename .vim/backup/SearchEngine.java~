@@ -1,0 +1,30 @@
+package searchengine;
+
+public class SearchEngine implements Runnable {
+    static String query;
+    static String[] results;
+    static SearchThread searchThread;
+    
+    public SearchEngine(query, results) {
+	this.query = query;
+	this.results = results;
+	//create a thread
+	new Thread(this).start();
+    }
+
+    public void run() {
+
+    }
+
+    public static void main(String[] args) {
+    
+    }
+}
+
+
+public class Browser implements Runnable {
+    public void run(){
+
+    }
+}
+

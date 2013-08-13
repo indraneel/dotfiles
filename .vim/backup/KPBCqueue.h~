@@ -1,0 +1,17 @@
+/* Indraneel Purohit */
+/* http://indraneelpurohit.com *?
+/* KPBC Fellows Application  */
+/* A queue, in C */
+
+/* KPBCqueue.h */
+
+#define MAX_QUEUE_SIZE 100
+
+typedef struct intQueue intQueue;
+typedef intQueue *intQueuep;
+
+struct intQueue {
+    int **array;
+    int size, front, rear, cap;
+};
+

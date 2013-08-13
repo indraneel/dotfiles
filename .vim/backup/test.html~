@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Test</title>
+    </head>
+
+    <body>
+
+    <script src="/slim/templates/js/jquery.js"></script>
+    <script src="/slim/templates/js/celebrity-main.js"></script>
+    <script src="http://static.opentok.com/v1.1/js/TB.min.js"></script>
+    <script src="/slim/templates/js/video.js"></script>
+    </body>
+
+</html>

@@ -1,0 +1,15 @@
+<?php
+require_once './twitter.class.php';
+require_once './keys.php';
+
+$twitter = new Twitter($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
+
+
+//$results = $twitter->search('#yolo');
+$results = $twitter->search(array('q' => 'KNIGHTWAGON'));
+
+foreach ($results as $status){
+    if ($status->user->name == 'KNIGHTWAGON' && $status->in_reply_to_user_id == NULL) {
+	echo $status->created_at . '|' . $status->text . "\n";
+    }
+}

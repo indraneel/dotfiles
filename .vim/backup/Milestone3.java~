@@ -1,0 +1,122 @@
+
+public class Milestone3 {
+	
+	public static void main (String[]args){
+		int winning = 0;
+		boolean flag; 
+		boolean[][]truth =  new boolean [5][5];
+		
+		char [][]minefield={{'0','0','0','1','1'},
+							{'0','0','1','2','b'},
+							{'1','1','2','b','2'},			
+							{'2','b','4','2','2'},
+							{'2','b','2','b','1'}};
+		
+		char[][]outputgrid={{'.','.','.','.','.'},
+							{'.','.','.','.','.'},
+							{'.','.','.','.','.'},			
+							{'.','.','.','.','.'},
+							{'.','.','.','.','.'}};
+		
+		boolean minesweeper = true;
+		
+		while (minesweeper){
+		    printBoard(outputgrid);
+			System.out.println("which box?");
+			int x=IO.readInt();
+			int y=IO.readInt();
+			System.out.println("do you want to flag it?");
+			flag=IO.readBoolean();
+			
+			if (flag==true){
+				outputgrid[x][y]='f';
+				flag=false;
+				printBoard(outputgrid);
+				continue;
+						}
+			
+			if (x>=minefield.length || y>=minefield.length){
+				System.out.println("out of bounds");
+				continue;
+				
+			
+				
+			}
+			revealCell(x,y, truth, minefield, outputgrid);
+			
+			if (outputgrid[x][y]=='b'){
+				System.out.println("game over");
+				minesweeper=false;
+			}else{
+				winning++;
+			}
+		
+		
+			for (int i=0, bomb=0; i<truth.length;i++){
+				for (int j=0; j<truth[i].length;j++){
+					if (truth[i][j]==false){
+						if (minefield[i][j]=='b'){
+							bomb++;
+						}
+					}
+				}
+				if (winning==((truth.length*truth[0].length)-bomb)){
+					System.out.println("WINNER");
+					minesweeper=false;
+				}
+			
+			}
+			
+			
+	}
+		
+	
+
+
+	}
+public static void printBoard(char[][] ss){
+		
+		for (int i=0; i < ss.length ; i++){
+			for (int j=0; j < ss[i].length; j++){
+				
+				System.out.print(ss[i][j]+"  ");
+				
+			}
+			System.out.println();
+		}
+	}
+
+	 public static void revealCell(int x, int y, boolean[][] truth,
+			char[][] minefield, char[][] outputgrid) {
+			
+			if (x>=minefield.length || y>=minefield[0].length || x<0 ||y<0){
+				return;
+			}
+			
+			if(outputgrid[x][y]==minefield[x][y]){
+				return;
+			}
+			truth[x][y]=true;
+			if(truth[x][y]==true){
+				if (minefield[x][y]>'0'){
+					outputgrid[x][y]=minefield[x][y];
+				}
+				if (minefield[x][y]=='0'){
+					outputgrid[x][y]=minefield[x][y];
+					revealCell(x+1,y, truth, minefield, outputgrid);
+					revealCell(x,y+1, truth, minefield, outputgrid);
+					revealCell(x+1,y+1, truth, minefield, outputgrid);
+					revealCell(x-1,y, truth, minefield, outputgrid);
+					revealCell(x,y-1, truth, minefield, outputgrid);
+					revealCell(x-1,y-1, truth, minefield, outputgrid);
+					revealCell(x+1,y-1, truth, minefield, outputgrid);
+					revealCell(x-1,y+1, truth, minefield, outputgrid);
+					}
+				
+				
+			}
+			
+
+}
+}
+

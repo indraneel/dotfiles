@@ -1,0 +1,12 @@
+Indraneel Purohit
+03/08/13
+CS 314
+Section 2
+-----------------
+Project 1
+readme.txt
+----------
+
+There shouldn't be any bugs, hopefully.  I should explain why this is late, though.  When I first submitted, I didn't realize that my optimizer didn't handle multiple optimizations in the same output file.  I fixed it, wrapping my optimization loop in another loop that ran everytime an optimization occurred.
+
+

@@ -1,0 +1,22 @@
+package recitation;
+
+public abstract class Template {
+    public Template(){
+	//set up graph
+    }
+
+    public draw(double[] xlist) {
+	for (int i =0; i< xlist.length; i++){
+	    double y = computeY(xlist[i]);
+	}
+    }
+    
+    protected abstract double computeY(double x);
+}
+
+public class LinePlot extends Template {
+    double slope, b;
+    protected double computeY(double x){
+	return slope * x + b;
+    }
+}

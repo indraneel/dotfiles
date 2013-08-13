@@ -1,0 +1,62 @@
+/*
+ * INDRANEEL PUROHIT
+ * PA4
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/time.h>
+#include <unistd.h>
+#include "cachesize.h"
+
+#define KB 1024
+#define MB 1024 *1024
+#define ARRAY_SIZE 4*1024*4096
+#define STRIDE_LENGTH 16 
+
+float cache(int stride, int large){
+    register* a;
+    a = (int *)malloc(stride * KB * sizeof(int));
+    int times, i, dummy;
+    float timeTaken;
+
+    gettimeofday(&start, NULL);
+    for (times=0; times<large; times++){
+	for (i=0; i<(stride * KB); i+=STRIDE_LENGTH){
+	    dummy = a[i];
+	}
+	/* printf("iteration# = %d\n", times);*/
+    }
+    gettimeofday(&end, NULL);
+
+    timeTaken = (end.tv_sec * 1000000 + end.tv_usec) - (start.tv_sec * 1000000 + start.tv_usec);
+
+    timeTaken = timeTaken/((stride*KB)/STRIDE_LENGTH);
+   
+    free(a);
+    return timeTaken;
+}
+
+int main(int argc, char *argv[]){
+   register* a;
+   register l;
+   float T, T1, T2;
+   a = sbrk(ARRAY_SIZE+8192);
+   a = (int *)((((int)a>>13)<<13)+8192);
+
+    /*
+     * instead of iterating over a fixed array a bunch of times in variable steps
+     * i'm going to iterate over an array of increasing size using a stride size of 16 integers
+     * log the times
+     */
+
+   int strides[] = {28,29,30,31,32,33};
+   for (l=0; l<6; l++){
+       T1 = cache(strides[l], 5000);
+       T2 = cache(strides[l], 10000);
+       T = (T1-T2)/(5000-10000);
+       printf("Access Size: %0.01d\t\tTime Taken = %0.12f\n", strides[l], T);
+   }
+
+   return 0;
+}

@@ -1,0 +1,153 @@
+
+public class Board {
+		
+	public char[][] board;
+	public char[][] answerBoard;
+	private int numbombs;
+	public MsGUI gui;
+	
+	
+	public Board() {
+		board =new char[][]
+				{
+				{'-','-','-','-','-'} , 
+				{'-','-','-','-','-'}, 
+				{'-','-','-','-','-'},
+				{'-','-','-','-','-',},
+				{'-','-','-','-','-'}
+				};
+	answerBoard = new char[][]  {   {'*','1','0','1','1'} , 
+									{'1','2','1','2','*'} , 
+									{'0','1','*','2','1'} ,
+									{'0', '2','2','3','1'},
+									{'0', '1','*','2','*' }
+								};
+	numbombs = 0;
+		for (int i = 0; i < answerBoard.length; i++) {
+			for (int j = 0; j < answerBoard[0].length; j++) {
+				numbombs += 0;
+			}
+		}
+	}
+	public void flagCell(int row, int col) {
+		board[row][col] = 'f';
+	}
+	
+	public boolean isFlagged(int row, int col) {
+		if (board[row][col] == 'f') {
+		return true;
+		} else {
+			return false;
+		}
+	}
+	public int getHeight() {
+		
+		return board.length;
+	}
+	
+	public int getWidth() {
+		return board[0].length;
+	} 
+	public char getValue(int row, int col) {
+		return board[row][col];
+	}
+	public void revealCell(int row, int col) {
+		if ( row > board.length || col > board[0].length || row < 0 || col < 0) {
+			
+		}
+		
+		int xchange	= 0;
+		int ychange = 0;
+		
+		if (answerBoard[row][col] == '*') {
+			board[row][col] = answerBoard[row][col];
+			gui.lose("you lose");
+		}
+		if (Character.isDigit(answerBoard[row][col]) &&  answerBoard[row][col] != '0') {
+				board[row][col] = answerBoard[row][col];
+				
+		}
+		if (answerBoard[row][col] == '0') {
+			board[row][col] = answerBoard[row][col];
+			xchange = row - 1;
+			
+			if (xchange >= 0 ) {
+				if (answerBoard[xchange][col] !=  '*' && board[xchange][col] != answerBoard[xchange][col]) {
+			revealCell ( xchange, col);
+				}
+			
+			
+			ychange = col + 1;
+			if (ychange <= board[0].length - 1) {
+				if (answerBoard[xchange][ychange] != '*' && board[xchange][ychange] != answerBoard[xchange][ychange]) {
+					revealCell( xchange, ychange);
+				}
+			}
+			
+			ychange = col - 1;
+			if (ychange >= 0) {
+				if (answerBoard[xchange][ychange] != '*' && board[xchange][ychange] != answerBoard[xchange][ychange]) {
+					revealCell( xchange, ychange);
+				}
+			}
+			}
+			ychange = col - 1;
+			if(ychange >= 0) {
+			if (answerBoard[row][ychange] != '*' && board[row][ychange] != answerBoard[row][ychange] ) {
+				revealCell( row, ychange);
+			}
+			}
+			ychange = col + 1;
+			if (ychange <= board[0].length - 1) {
+				if (answerBoard[row][ychange] != '*' && board[row][ychange] != answerBoard[row][ychange] ) {
+					revealCell( row, ychange);
+				}
+			}
+			
+			xchange = row + 1;
+			if (xchange <= board.length - 1) {
+				if (answerBoard[xchange][col] !=  '*' && board[xchange][col] != answerBoard[xchange][col]) {
+			revealCell ( xchange, col);
+				}
+			
+			ychange = col +1;
+			if (ychange <= board[0].length -1) {
+				if (answerBoard[xchange][ychange] != '*' && board[xchange][ychange] != answerBoard[xchange][ychange] ) {
+					revealCell( xchange, ychange);
+				}
+			}
+			ychange = col - 1;
+			if (ychange >= 0) {
+				if (answerBoard[xchange][ychange] != '*' && board[xchange][ychange] != answerBoard[xchange][ychange] ) {
+					revealCell( xchange, ychange);
+				}
+			}
+			}
+			
+		}
+		int count = 0;
+		for (int i = 0; i < board.length; i++ ) {
+			
+			for (int j = 0; j < board[0].length; j++) { 
+				if (board[i][j] == answerBoard[i][j])
+					count += 1;
+			}
+		}
+		if (count == board.length * board[0].length - numbombs ) 
+			gui.win("you win");
+		 
+	}
+	public void unflagCell(int row, int col) {
+		if (board[row][col]== 'f') 
+		board[row][col] = '-';
+	}
+
+	public static void main(String[] args){
+	    Board b = new Board();
+	    b.gui = new MsGUI(b);
+
+
+	}
+
+	}
+

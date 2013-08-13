@@ -1,0 +1,13 @@
+<html>
+    <head>
+	<title>SVG</title>
+    </head>
+    <body>
+	<svg width="960" height="500">
+	    <text y="12>
+		Hello, World
+	    </text>
+	</svg>
+    </body>
+    <script src="/d3.v2.js"></script>
+</html>

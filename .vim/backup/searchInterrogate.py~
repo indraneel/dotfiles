@@ -1,0 +1,22 @@
+import re
+
+class Group(Object):
+    def __init__(self, MDN, LIID, Period, REFID, COMMID):
+	self.MDN = MDN
+	self.LIID = LIID
+	self.Period = Period
+	self.REFID = REFID
+	self.COMMID = COMMID
+
+if __name__ == '__main__':
+    txt = open("f.dat")
+    line = txt.readline()
+    
+    chunks = []
+
+    while line:
+	# regex to get each chunk
+	# regex to get each value
+	# make new Group object to hold above ^
+	# add new Group object to a list
+	line = txt.readline()
