@@ -1,10 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/Users/indraneelpurohit/Dropbox/RU/Sophomore Year/Second Semester/213/photolibrary/.hg'
-let g:netrw_dirhist_2='/Users/indraneelpurohit/Dropbox/RU/Sophomore Year/Second Semester/213/android-chess'
-let g:netrw_dirhist_3='/Users/indraneelpurohit/Dropbox/RU/Sophomore Year/Second Semester/213/android-chess/.hg'
-let g:netrw_dirhist_4='/Users/indraneelpurohit'
-let g:netrw_dirhist_5='/Users/indraneelpurohit/Dropbox'
-let g:netrw_dirhist_6='/Users/indraneelpurohit/Dropbox/CourseData'
-let g:netrw_dirhist_7='/Users/indraneelpurohit/Dropbox'
-let g:netrw_dirhist_8='/Users/indraneelpurohit/Downloads/vim-latex-1.8.23-20130116.788-git2ef9956'
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/indraneelpurohit/Code/HackNY'
+let g:netrw_dirhist_2='/Users/indraneelpurohit/Code/HackNY/Punch-Card'
+let g:netrw_dirhist_3='/Users/indraneelpurohit/Code/HackNY/Punch-Card/APICalls'
+let g:netrw_dirhist_4='/Users/indraneelpurohit/Code'
