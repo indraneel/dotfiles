@@ -72,3 +72,26 @@ UNDERLINE=$(tput smul)
 # unstaged and untracked symbols are shown, too (see above)
 # this prompt uses the short colour codes defined above
 PS1='\[${BRIGHT}\]\u\[${WHITE}\]:\[${MAGENTA}\]\[${UNDERLINE}\]\w\[${NORMAL}\]\[${YELLOW}\]`__git_ps1 " (%s)"`\[${WHITE}\] ¬ '
+
+
+# bash script folder
+
+
+up(){
+  local d=""
+  limit=$1
+  for ((i=1 ; i <= limit ; i++))
+    do
+      d=$d/..
+    done
+  d=$(echo $d | sed 's/^\///')
+  if [ -z "$d" ]; then
+    d=..
+  fi
+  cd $d
+}
+
+#change the tabname
+function tabname {
+  printf "\e]1;$1\a"
+}

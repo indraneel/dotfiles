@@ -1,5 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =9
 let g:netrw_dirhist_1='/Users/indraneelpurohit/Code/HackNY'
 let g:netrw_dirhist_2='/Users/indraneelpurohit/Code/HackNY/Punch-Card'
 let g:netrw_dirhist_3='/Users/indraneelpurohit/Code/HackNY/Punch-Card/APICalls'
+let g:netrw_dirhist_4='/Users/indraneelpurohit/Code'
+let g:netrw_dirhist_5='/Users/indraneelpurohit/Music/Logic'
+let g:netrw_dirhist_6='/Users/indraneelpurohit/Code/JavaScript/Node/CourseData/views'
+let g:netrw_dirhist_7='/Users/indraneelpurohit/Code/JavaScript/Chrome-Extensions-Boilerplate/samples/simple-twitter'
+let g:netrw_dirhist_8='/Users/indraneelpurohit/Code/JavaScript'
+let g:netrw_dirhist_9='/Users/indraneelpurohit/Code'

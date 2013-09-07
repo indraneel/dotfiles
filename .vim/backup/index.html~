@@ -1,64 +1,58 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-	<meta charset="utf-8">
-	<title>Canvas Background through CSS</title>
-	<style type="text/css" media="screen">
+---
+layout: default
+title: home
+---
 
-	    @font-face {
-		font-family: "Telegram HPLHS";
-		src:local("./Telegram HPLHS.ttf");
-	    }
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+      <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+ <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"> 
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta content="en-us" http-equiv="Content-Language" />
+    <meta content="Indraneel Purohit IN TECHNICOLOR!." name="description" />
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+    <link rel="alternate" type="application/atom+xml" title="Indraneel Purohit - Atom" href="/atom.xml" />
+    <title>indraneelpurohit.com</title>
+    <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-18477555-1']);
+  _gaq.push(['_trackPageview']);
 
-	    body {
-		/*background-color: #e9d9c2;*/
-		background-color: #FFFFFF;
-		/*background-image: url(background.jpg) top left repeat-x;*/
-		font-family: "Telegram HPLHS", serif;
-	    }
-	</style>
-    </head>
-    <body>
-	<div style='font-family: "Telegram HPLHS"'> </div>
-	<img id="telegram" src="./telegram.jpg" width="700" height="476" style="display:none" />
-	<canvas id="telegramcanvas"  width="700" height="476"></canvas>
-	<script src="./jquery.min.js"></script>
-	<script type="text/javascript" charset="utf-8">
-	    $(document).ready(function() {
-		/*apikey ="10a346e5d8ddbc7e536f1916cde1824d:18:67525807";
-		var getStories = function(){
-		query = "hackny";
-		console.log(encodeURIComponent(":"));
-		    dataString = "query="+query+"&api-key="+encodeURIComponent(apikey);
-		    console.log(dataString); 
-		    $.ajax({
-			type: "GET",
-			/*url: "http://api.nytimes.com/svc/search/v1/article",
-			url: "https://dl.dropbox.com/u/117295/nytimes.py",
-			dataType: "jsonp",
-			jsonp:"callback",
-			data:dataString,
-			success: function() {
-			    console.log("success");
-			},
-			error: function() {
-			    console.log("failure");
-			}
-		    });
-		}
-		 */
-		console.log({{date}});
-		var canvas = document.getElementById("telegramcanvas");
-		var context = canvas.getContext("2d");
-		var telegram = document.getElementById("telegram");
-		context.drawImage(telegram,0,0);
-		context.font = '32px "Telegram HPLHS" serif';
-		context.textBaseline = "top";
-		//getStories();
-		context.fillText("A Secret Deal on Drones, Sealed in Blood", 58, 225);
-		context.fillText("OBAMA OBAMA OBAMA OBAMA", 58, 275);
-		context.fillText("Student run hackathon in new york city", 58, 325);
-	    });
-	</script>
-    </body>
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+  </head>
+  <body>
+    <header>
+      <div id="blurb">
+        <p>Hi! I'm Indraneel. I'm a sophomore at <a href="http://nb.rutgers.edu/">Rutgers University</a>, studying many things but primarily <a href="http://www.cs.rutgers.edu/">Computer Science</a>.</p>
+        <p>I love programming, entrepreneuship, hip-hop, photography, sports, history & current events.</p>
+    </div>
+    <img src="https://sphotos-a.xx.fbcdn.net/hphotos-ash3/524562_10150931317016986_150425484_n.jpg" width="720"></img>
+    </header>
+    <div id="wrapper">
+      <div class="post">
+      <ul>
+        {% for post in site.posts limit:5 %}
+        <li>
+            <span class="date">
+              <span class="day">{{ post.date | date: '%d' }}</span>
+              <span class="month"><abbr>{{ post.date | date: '%b' }}</abbr></span>
+              <span class="year">{{ post.date | date: '%Y' }}</span>
+            </span>—
+          <a href="{{ post.url }}" title="{{ post.title }}">
+            <span class="title">{{ post.title }}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      </div>    
+    </div>
+  </body>
 </html>

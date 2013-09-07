@@ -1,39 +1,15 @@
-% LaTeX resume using res.cls
-\documentclass[margin]{res}
-\usepackage{helvetica} % uses helvetica postscript font (download helvetica.sty)
-% \usepackage{xcolor}
-%\usepackage{newcent}   % uses new century schoolbook postscript font 
-\setlength{\textwidth}{5.1in} % set width of text portion
-
+\documentclass[10pt]{article}
+\usepackage[margin=3cm]{geometry}
+\title{\bfseries\Huge Indraneel Purohit}
+\author{indraneelpurohit@gmail.com}
+\date{}
 \begin{document}
-
-% Center the name over the entire width of resume:
- \moveleft.5\hoffset\centerline{\large\bf Indraneel Purohit}
-% Draw a horizontal line the whole width of resume:
- \moveleft\hoffset\vbox\hrule{width\resumewidth height 1pt}\smallskip
-% address begins here
-% Again, the address lines must be centered over entire width of resume:
- \moveleft.5\hoffset\centerline{indraneelpurohit@gmail.com}
- \moveleft.5\hoffset\centerline{732-618-4357}
- \moveleft.5\hoffset\centerline{indraneelpurohit.com}
-
-
-\begin{resume}
- 
-\section{EDUCATION} {\sl B.S.} Computer Science \\
-                      % \sl will be bold italic in New Century Schoolbook (or
-	              % any postscript font) and just slanted in
-		      %	Computer Modern (default) font
-                Rutgers University, New Brunswick, NJ, 
-                expected May 2015\\
- 
-\section{SKILLS} {\sl Languages:} Java, JavaScript, HTML/CSS, C, PHP\\
-		{\sl Libraries & Frameworks:} jQuery, Flask\\
-		{\sl Software:} Vim, Git, Terminal, Eclipse, \\
-                {\sl Operating Systems:} *nix, iOS. \\
-\end{resume}
+\maketitle
+\hspace{6em}
+\begin{minipage}[ht]{0.48\textwidth}
+http://indraneelpurohit.com
+\end{minipage}
+\begin{minipage}[ht]{0.48\textwidth}
+732 618 4357
+\end{minipage}
 \end{document}
-
-
-
-

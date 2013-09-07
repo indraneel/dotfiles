@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [[ $# -ne 1 ]]
+then
+    echo "express_coffee: Usage: express_coffee <name-of-project>\n"
+    echo "Number of arguments: $#\n";
+    exit 1
+fi
+
+express $1
+js2coffee "$1/index.js" > "$1/index.coffee"
+js2coffee "$1/routes/routes.js" > "$1/routes/routes.coffee"

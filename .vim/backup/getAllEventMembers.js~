@@ -1,0 +1,33 @@
+javascript:function move() {
+
+    document.onreadystatechange = function () {
+	if (document.readyState == "complete") {
+	    currURL = document.URL;
+	    urlParts = currURL.split('/');
+	    uid = urlParts[urlParts.length-2];
+	    newURL = "https://www.facebook.com/browse/event_members/?id="+uid+"&edge=temporal_groups%3Amember_of_temporal_group&showstatus=0";
+	    window.location = newURL;
+	}
+    }
+}
+function gaem() {
+    document.onreadystatechange = function () {
+	if (document.readyState == "complete") {
+	    document.getElementById('u_0_8').click();
+	    arr = document.getElementsByClassName('_54nh');
+	    arr[5].click();
+	    invited = document.getElementsByClassName('uiList');
+	    invited = document.getElementsByClassName('uiProfileBlockContent')
+	    var firstSubClass = [];
+	    for (var i=0; i<invited.length; i++){ 
+		firstSubClass.push(invited[i].getElementsByClassName('_6a _6b'));
+	    }
+	    var allGuests;
+	    for (var i=0; i<firstSubClass.length; i++) {
+
+	    }
+
+	    console.log(allGuests);
+	}
+    }
+} move();gaem();void(0)
