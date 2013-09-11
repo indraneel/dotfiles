@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [[ $# -ne 1 ]]
+then
+    echo "template: Usage: template <name-of-template>\n"
+    echo "Number of arguments: $#\n";
+    exit 1
+fi
+
+

@@ -74,6 +74,9 @@ UNDERLINE=$(tput smul)
 PS1='\[${BRIGHT}\]\u\[${WHITE}\]:\[${MAGENTA}\]\[${UNDERLINE}\]\w\[${NORMAL}\]\[${YELLOW}\]`__git_ps1 " (%s)"`\[${WHITE}\] ¬ '
 
 
+# bash script folder
+export PATH=~/dotfiles/Bash-Scripts/:$PATH
+
 up(){
   local d=""
   limit=$1
@@ -86,4 +89,9 @@ up(){
     d=..
   fi
   cd $d
+}
+
+#change the tabname
+function tabname {
+  printf "\e]1;$1\a"
 }
