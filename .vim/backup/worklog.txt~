@@ -1,0 +1,95 @@
+3/26/13 - Tuesday 2pm-5pm
+	Others here: Josh, Katie, Harry
+	First day! 
+	Set up work environment.	
+	Set up on Solaris.
+	Built and deployed nano 2.3.2 (testing) to Solaris9.
+	Set up on CentOS/opus5/Koji
+4/1/13 - Monday 2pm-5pm
+	Others here: Josh, Katie, Harry, Jarek, Matthew (also new)
+	attempting to build nano on CentOS
+	there's no nano package on CentOS, need to add
+	there's no nano specfile for CentOS, need to make or find	
+	quick detour to read about Fedora, CentOS, yum, upstream, etc. (i.e., all
+	the terms that are thrown around that I only understand in context) =>
+	put these things in help.txt
+4/2/13 - Tuesday 2pm-
+	Others here: Josh and Katie until 3 (didn't start doing anything until
+	they left)
+	didn't send srpm for nano 2.2.6-1 to koji yesterday; doing that now.
+	built to staging successfully!
+		build DID NOT work when i tried to pushpackage to rutgers-testing.
+		even though I built the build for centos6 (.ru6), it is failing on centos5. so
+		pushpackage or rutgers-testing must test against centos5 (and 6?) and won't
+		work if the rpm doesn't support centos5. this is a problem i do not know the
+		immediate solution to.	
+
+		ssh'd into centos5-64-build, but i can't run rpm -i on here. i
+		think i might have a permissions problem that I don't know about.
+4/8/13 - Monday 2pm - 	
+	Others here: matt, josh, katie, harry, jarek
+	pushed nano to centos6
+	rebuilt webtools for centos6 and pushed
+	--
+	now i'm doing things
+	that jarek wants me to do:
+		editing a package to include some cron scripts
+		building cron scripts into a package	
+
+4/9/13 - Tuesday 2pm -
+	still fixing rutgers-repotools to include kojibackup.sh and
+automagiccheck.py inside of the cron.daily 
+	confused as to how i can update rutgers-repotools from opus5 if it
+only exists on omachi...
+	GOT IT THANK YOU HARRY! I HAVE TO UNTAR AND GO INSIDE THE UNTARRED
+DIR AND ADD THE FILES THAT WAY ON OPUS. then i can move automagiccheck and kojibackup
+into rutgers-repo[untarred] and then add the shell scripts that i have to
+write that call the aforementioned scripts the way they are called in
+/etc/crontab/.  make sure I bump the minor version number (_._.X) in the
+tarball name, specfile, and all internal references to it (like setup.py)
+	i have more questions though:
+		what does %{config} do in the specfile?
+		how do i add references to new files? probably just going to
+copy how they're done for depcheck
+
+4/16/13 - Tuesday 2pm-5pm
+	[no entry: why?]
+		
+
+4/22/13 - Monday 2pm-5pm
+	handed in mine and matt's vouchers
+	still working on rutgers-repotools	
+	pulled from github
+	added .py and .sh scripts to cron.daily
+	wrote shell script that runs both as specified currently in crontab
+	don't know how to check if this actually works
+
+4/23/13 - Tuesday 2pm-5pm
+	got package to build correctly! new script and all. 
+	have to figure out how to test it
+4/29/13 - Monday 2pm-5pm
+	installing on omachi-new
+	installed on omachi-new successfully
+	now to build python-createrepo (rutgers-repotools dependency) for centos6
+	then to throw everything back into the original git repo issue a pull request?	
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+summer internship
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+8/22/13 - first day back, relearned how to build an rpm w/ kyle (kyle's here
+now!)
+	- looked at rpm2python source, tried to figure out an error
+	- started new version of rutgers mobile app website 
+
+
+
+
+
+
+
+
+
+
+
+

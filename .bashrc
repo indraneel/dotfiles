@@ -6,8 +6,9 @@ alias apache-start="sudo /opt/local/apache2/bin/apachectl start"
 alias apache-restart="sudo /opt/local/apache2/bin/apachectl restart"
 alias apache-stop="sudo /opt/local/apache2/bin/apachectl stop"
 
-#So begins Indraneel's Aliases — call me Jennifer Garner doe
-if [ -f ~/bash/bash_aliases ]; then . ~/bash/bash_aliases fi
+if [ -f ~/bash/bash_aliases ]; then
+    . ~/bash/bash_aliases
+fi
 
-#functions
-
+# You were missing this - Kyle
+# export PS1='[ KYLE IS MY FAVE ]\$ '

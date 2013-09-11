@@ -92,3 +92,18 @@ cmap w!! w !sudo tee >/dev/null %
 
 " ./vim/autoload/pathogen.vim
 call pathogen#infect()
+
+" ALIASES
+cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+
+
+" FUNCTIONS
+" show us when lines go over 80 characters in length.
+function! ShowLongLines()
+    try
+        /\%>80v.\+
+        match ErrorMsg '\%>80v.\+'
+    catch E486
+        call echo('All lines are within 80 characters.')
+    endtry
+endfunction
