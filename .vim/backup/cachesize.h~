@@ -1,5 +1,0 @@
-#include <sys/time.h>
-
-struct timeval start;
-struct timeval end;
-float cache(int,int);
