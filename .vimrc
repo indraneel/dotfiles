@@ -96,6 +96,9 @@ call pathogen#infect()
 " ALIASES
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 
+" Backup stuff
+set backup
+set backupdir=~/.vim/backups
 
 " FUNCTIONS
 " show us when lines go over 80 characters in length.
