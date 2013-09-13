@@ -10,5 +10,4 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# You were missing this - Kyle
-# export PS1='[ KYLE IS MY FAVE ]\$ '
+export PS1="\u:[\[\e[35m\]\w\[\e[m\]]\n"
