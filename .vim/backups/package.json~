@@ -1,0 +1,18 @@
+{
+  "author": "Indraneel Purohit <ip132@jla.rutgers.edu>",
+  "name": "Rutgers-Mobile-App-Site",
+  "description": "Rutgers Mobile App website",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git@css-gitlab.rutgers.edu:mobile/site.git"
+  },
+  "engines": {
+    "node": "~0.6.11"
+  },
+  "dependencies": {
+      "wintersmith": "~2.0.7"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {}
+}

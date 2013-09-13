@@ -35,8 +35,8 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 #############################
 
 # enable the git bash completion commands
-# source ~/.git-completion
-# source ~/.git-prompt.sh
+source ~/.git-completion
+source ~/.git-prompt.sh
  
 # enable git unstaged indicators - set to a non-empty value
 GIT_PS1_SHOWDIRTYSTATE="."

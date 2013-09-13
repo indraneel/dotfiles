@@ -6,8 +6,8 @@ PATH=$PATH:~/bash
 # alias apache-restart="sudo /opt/local/apache2/bin/apachectl restart"
 # alias apache-stop="sudo /opt/local/apache2/bin/apachectl stop"
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/bash/bash_aliases ]; then
+    . ~/bash/bash_aliases
 fi
 
 # You were missing this - Kyle
