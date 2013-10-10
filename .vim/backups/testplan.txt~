@@ -1,0 +1,101 @@
+Robert Fidler and Indraneel Purohit
+
+Test Plan:
+
+    Do all of the below, as detailed even more below, to show complete
+    testedness:
+	1. Test Individual Units
+	2. Edge Cases
+    We tested on integer types, under the assumption that comparison functions
+    will work as expected.
+
+1. Individual Units:
+
+    * Create List
+	I: SortedListPtr list = SLCreate(func) 
+	O: list != NULL
+
+    * Insert
+	I: SLInsert (list, &arrayOfInts[i])
+	O: return 1 
+
+    * Delete
+	I: SLRemove(list, &elementToDelete) 
+	O: return 1 
+
+    * Create Iterator
+	I: SortedListIteratorPtr iter = SLCreateIterator(list) 
+	O: return 1
+
+    * Next Item (on a normal list)
+	I: item = SLNextItem(iter)
+	O: return 1  
+
+    * Destroy Iterator
+	I: SLDestroyIterator(iter)
+	O: return 1
+
+    * Destroy List
+	I: SLDestroy(list)
+	O: return 1
+
+2. Edge Cases
+    
+    * Inserting after deleting an element that an iterator was pointing to
+	Expected behavior:
+	    If an iterator determines that when it is about to get the next
+	    element that the element that it is currently pointing to has been
+	    deleted it will go back to the beginning of the list and agnostically
+	    determine which element comes after it using the comparator function
+	    provided to the list.
+	
+	I:  SortedListPtr list = SLCreate(func);
+	    // assume list contents are {7.0,5.0,3.0}
+	    double next;
+	    SortedListIteratorPtr iter = SLCreateIterator(list);
+	    next = SLNextItem(); // 7.0
+	    next = SLNextItem(); // 5.0
+	    double four = 4.0;
+	    SLInsert (list, four);
+	    next = SLNextItem(); // 4.0
+	    printf("%f", next);
+	     
+	O:  4.00
+
+	I:  //remove 4, add 4 
+	O:  Expected behavior: the initial '4' is removed, but the iterator is
+	    remaining pointing to it. Then, the next '4' is added to the list,
+	    making the list 7->5->4->3. SLNextItem() should now return '4'
+	    because _we decided_ to go back to the beginning of the list, and
+	    look for the first item that is less than or equal to the item
+	    just removed. 
+
+	
+	I:  //remove 4, add 5
+	    List is now 7->5->5->3
+	O:  Get the next item, which should be 3. This coincides with the
+	    decision we made, which we detailed above.
+
+    * Remove an element that two iterators just returned in SLGetNextItem
+	I:  //The list is still 7->5->5->3, the initial iterator is on 3.0.
+
+	    //We add 2.0 to the list.
+
+	    //We create a second iterator and move it to point to the same
+	    //node containing 3.0 that the first iterator is pointing to.
+
+	    //We delete that element from the list using SLRemove. The list is
+	    //now 7->5->5->2, BUT the reference counts of the node containing
+	    //3.0 is then brought to two because there are two iterators
+	    //pointing to it, BUT it is no longer in the list.
+
+	    //Then we call SLNextItem(iter) and SLNextItem(iter2)
+
+	O:  The list is now 7->5->5->2
+	    The output of SLNextItem(iter) should be: 2
+	    The output of SLNextItem(iter2) should be: 2
+
+
+
+		
+

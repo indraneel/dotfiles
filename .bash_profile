@@ -1,3 +1,7 @@
+if [ -f ~/.bashrc]; then
+    . ~/.bashrc
+fi
+
 export PATH=${PATH}:inHDD/Applications/android/tools
 # Setting PATH for Python 2.7
 # The orginal version is saved in .bash_profile.pysave
@@ -39,16 +43,16 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 # source ~/.git-prompt.sh
  
 # enable git unstaged indicators - set to a non-empty value
-GIT_PS1_SHOWDIRTYSTATE="."
+# GIT_PS1_SHOWDIRTYSTATE="."
  
 # enable showing of untracked files - set to a non-empty value
-GIT_PS1_SHOWUNTRACKEDFILES="."
+# GIT_PS1_SHOWUNTRACKEDFILES="."
  
 # enable stash checking - set to a non-empty value
-GIT_PS1_SHOWSTASHSTATE="."
+# GIT_PS1_SHOWSTASHSTATE="."
  
 # enable showing of HEAD vs its upstream
-GIT_PS1_SHOWUPSTREAM="auto"
+# GIT_PS1_SHOWUPSTREAM="auto"
  
 BLACK=$(tput setaf 0)
 RED=$(tput setaf 1)

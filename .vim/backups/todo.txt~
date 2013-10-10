@@ -1,0 +1,22 @@
+- take two strings as input
+- create tokenizer
+    - fill out tokenizer struct
+    - fill out tokenizer creation function
+    - fill out tokenizer destruction function
+- iterate over first string of separator characters and create a bit vector representing the existence of a character as a separator
+    - iterate over string
+    - grab non-escaped characters
+    - grab escape characters
+    - create bit vector
+    - add to bit vector
+- iterate over tokens string and use created bit vector to check for delims
+    - if delim match print out current char string accumulated
+    - print out new line
+    - reset char accumulation and continue until '\0' detected
+    - convert any escape characters to their hex values
+- organize everything as a struct
+
+
+
+
+

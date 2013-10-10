@@ -1,3 +1,7 @@
+if [ -f ~/.bashrc]; then
+    . ~/.bashrc
+fi
+
 export PATH=${PATH}:inHDD/Applications/android/tools
 # Setting PATH for Python 2.7
 # The orginal version is saved in .bash_profile.pysave
@@ -35,8 +39,8 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 #############################
 
 # enable the git bash completion commands
-source ~/.git-completion
-source ~/.git-prompt.sh
+# source ~/.git-completion
+# source ~/.git-prompt.sh
  
 # enable git unstaged indicators - set to a non-empty value
 GIT_PS1_SHOWDIRTYSTATE="."

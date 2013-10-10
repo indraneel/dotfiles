@@ -1,0 +1,10 @@
+#ifndef	INDEX_H
+#define INDEX_H
+
+#include <stdlib.h>
+#include "twople.h"
+#include "sorted-list.h"
+#include "hashmap.h"
+
+
+#endif

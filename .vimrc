@@ -11,7 +11,7 @@ set shiftwidth=4	" number of columns indented with << and >>
 set backspace=2		" make backspce work like most other apps
 set pastetoggle=<F2>	" allows text to be pasted with original alignment
 set autoindent		" indents each line the same as the previous one
-" set cindent		" indents according to C indentation standard, should not be used with smartindent
+" set cindent		indents according to C indentation standard, should not be used with smartindent
 set smartindent		" automatically inserts one extra level of indentation
 set incsearch		" search as string is typed
 set ignorecase		" ignore case on search
@@ -69,6 +69,15 @@ nnoremap <c-l> <c-w>l
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 
+" makes tab movement easier
+nmap <C-n> :tabn<cr>
+nmap <C-p> :tabp<cr>
+
+" makes buffer movement easier
+nmap <C-S-h> :bp<cr>
+nmap <C-S-l> :bn<cr>
+
+
 " }}
 
 " Backups - {{
@@ -117,3 +126,4 @@ function! ShowLongLines()
         call echo('All lines are within 80 characters.')
     endtry
 endfunction
+

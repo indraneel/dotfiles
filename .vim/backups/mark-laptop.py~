@@ -1,0 +1,110 @@
+import csv
+import matplotlib
+#matplotlib.use('Agg')
+matplotlib.use('GTK')
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_pdf import PdfPages
+import numpy as np
+
+def get_full_array():
+	row = []
+	reader = csv.reader(open("laptops.csv", "rb"))
+	for line in reader:
+		row.append(line)
+	row = row[1:]
+	return row
+
+def get_producer_mode(full):
+	producers = []
+	list = []
+	max = 0
+	for x in full:
+		if x[0] not in producers:
+			producers.append(x[0])
+			list.append(0)
+		else:
+			for i in range(len(producers)):
+				if x[0] == producers[i]:
+					list[i] += 1
+	
+	for y in range(len(producers)):
+		if list[y] > max:
+			max = list[y]
+			answer = producers[y]
+	return answer
+
+def percent_verified_of_real_name(full):
+# need real and ver_and_real to be floats for division
+	real = 0.0
+	ver = 0.0
+	ver_and_real = 0.0
+	for x in full:
+		if x[2] == "1":
+			real += 1
+			if x[3] == "1":
+				ver_and_real += 1
+		if x[3] == "1":
+			ver += 1
+	print ver_and_real, real, ver
+	return "ver_and_real/real:" + str(ver_and_real/real), "ver_and_real/ver:" + str(ver_and_real/ver)
+
+def release_to_review_time(full):
+	scattered = []
+	min = 500
+	max = -1
+	for x in full:
+		curr = int(x[1])
+		scattered.append(curr)
+		if curr > max:
+			max = curr
+		if curr < min:
+			min = curr
+	count = len(scattered)
+	order = sorted(scattered)
+
+# median is odd
+	med = order[(len(order) - 1) / 2]
+
+# q1 and q3: len(order) % 4 = 3
+	place_of_q1 = (len(order) - (len(order) % 4)) / 4
+	q1 = order[place_of_q1]
+	q3 = order[len(order) - 1 - place_of_q1]
+
+# interquartile range
+	iqr = q3 - q1
+
+	return min, q1, med, q3, max, iqr, count
+
+def length_of_review_bins(full):
+	lengths = []
+	for x in full:
+		lengths.append(int(x[7]))
+	ordered = sorted(lengths)
+	bins = [0]
+	count = [0]
+	for x in ordered:
+		if(((x - 1) / 200) not in bins):
+			for y in range(len(bins), ((x - 1) / 200) + 1):
+				bins.append(y)
+				count.append(0)
+		count[(x - 1) / 200] += 1
+	return bins, count
+
+full = get_full_array()
+#print get_producer_mode(full)
+#print percent_verified_of_real_name(full)
+#print release_to_review_time(full)
+#print length_of_review_bins(full)
+def plot_histogram():
+    import pdb; pdb.set_trace()
+    x, y = length_of_review_bins(full)
+    fig = plt.hist(y, 200)
+    return set(fig.flat) 
+
+#pp = PdfPages("test-histogram.pdf")
+#pp.savefig(plot_histogram())
+#pp.close()
+
+bins, x = length_of_review_bins(full)
+plt.hist(x, 200)
+plt.show()
