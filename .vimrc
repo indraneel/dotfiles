@@ -20,7 +20,7 @@ set showcmd		" shows normal mode key presses at bottom
 set confirm		" dialog asking to confirm things instead of error
 set wildmenu		" menu pops up for tab completion on commands 
 set ruler		" show current position at bottm
-filetype indent on	" enable loading indent file for specific files
+set tabpagemax=20	" sets max # of tabs possible
 filetype plugin indent on   " so I can use pathogen.vim
 syntax on		" turn on syntax highlighting
 
