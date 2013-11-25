@@ -75,8 +75,10 @@ UNDERLINE=$(tput smul)
 # this prompt is a green username, black @ symbol, cyan host, magenta current working directory and white git branch (only shows if you're in a git branch)
 # unstaged and untracked symbols are shown, too (see above)
 # this prompt uses the short colour codes defined above
-PS1='\[${BRIGHT}\]\u\[${WHITE}\]:\[${MAGENTA}\]\[${UNDERLINE}\]\w\[${NORMAL}\]\[${YELLOW}\]`__git_ps1 " (%s)"`\[${WHITE}\] ¬ '
-
+# PS1='\[${BRIGHT}\]\u\[${WHITE}\]:\[${MAGENTA}\]\[${UNDERLINE}\]\w\[${NORMAL}\]\[${YELLOW}\]`__git_ps1 " (%s)"`\[${WHITE}\] ¬ '
+# Simple Kyle version
+# PS1='\n \u @ \h in \w \n\$ '
+PS1='\n \u @ \h in \w \n∆ '
 
 # bash script folder
 export PATH=~/dotfiles/Bash-Scripts/:$PATH

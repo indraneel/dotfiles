@@ -34,6 +34,7 @@ set grepprg=ack
 " thread that helped me choose the color for hi CursorLine: http://tech.groups.yahoo.com/group/vim/message/105727
 " choosing colors: http://colorschemedesigner.com/
 colo molokai 
+" colo github 
 
 " line highlighting
 hi CursorLine cterm=None ctermbg=235 
@@ -59,7 +60,9 @@ inoremap <Up> <C-o>gk
 map <CR> o<Esc>k
 
 " use Space to add spaces in cmd mode
-map <Space> i<Space><Esc>
+" map <Space> i<Space><Esc>
+map <Space> :noh<CR>
+
 
 nmap J }
 nmap K {

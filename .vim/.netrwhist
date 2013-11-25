@@ -1,11 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/heroes/u1/ip132/node_modules/wintersmith/node_modules'
-let g:netrw_dirhist_2='/heroes/u1/ip132/dotfiles'
-let g:netrw_dirhist_3='/.autofs/ilab/ilab_users/ip132/214'
-let g:netrw_dirhist_4='/.autofs/ilab/ilab_users/ip132/214/pa3'
-let g:netrw_dirhist_5='/.autofs/ilab/ilab_users/ip132/214'
-let g:netrw_dirhist_6='/.autofs/ilab/ilab_users/ip132/214/pa3'
-let g:netrw_dirhist_7='/.autofs/ilab/ilab_users/ip132/dotfiles'
-let g:netrw_dirhist_8='/.autofs/ilab/ilab_users/ip132/dotfiles/Bash-Scripts'
-let g:netrw_dirhist_9='/.autofs/ilab/ilab_users/ip132/dotfiles/.vim'
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/.autofs/ilab/ilab_users/ip132/.vim/bundle'
+let g:netrw_dirhist_2='/.autofs/ilab/ilab_users/ip132/.vim'
+let g:netrw_dirhist_3='/.autofs/ilab/ilab_users/ip132'
