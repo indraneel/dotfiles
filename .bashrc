@@ -1,5 +1,7 @@
  # [[ -s $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm
 
+set -o vi
+
 PATH=$PATH:~/bash
 # PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 # alias apache-start="sudo /opt/local/apache2/bin/apachectl start"

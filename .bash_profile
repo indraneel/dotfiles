@@ -1,6 +1,8 @@
 if [ -f ~/.bashrc]; then
-    . ~/.bashrc
+    source ~/.bashrc
 fi
+
+set -o vi
 
 export PATH=${PATH}:inHDD/Applications/android/tools
 # Setting PATH for Python 2.7
@@ -78,7 +80,7 @@ UNDERLINE=$(tput smul)
 # PS1='\[${BRIGHT}\]\u\[${WHITE}\]:\[${MAGENTA}\]\[${UNDERLINE}\]\w\[${NORMAL}\]\[${YELLOW}\]`__git_ps1 " (%s)"`\[${WHITE}\] ¬ '
 # Simple Kyle version
 # PS1='\n \u @ \h in \w \n\$ '
-PS1='\n \u @ \h in \w \n∆ '
+PS1='\u @ \h in \w \n∆ '
 
 # bash script folder
 export PATH=~/dotfiles/Bash-Scripts/:$PATH
