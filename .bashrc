@@ -13,3 +13,5 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 export PS1="\u:[\[\e[35m\]\w\[\e[m\]]\n"
+
+alias pdflatex='pdflatex -interaction nonstopmode -file-line-error'
