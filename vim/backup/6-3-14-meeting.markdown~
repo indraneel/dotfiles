@@ -1,0 +1,37 @@
+agencies/etc submit  creatives to the ad network
+ads are fixed sizes
+agnecies/etc bid on ad space (this is automated) and the winning bid gets served
+
+NGD = non guaranteeed delivery
+    non-owned pages
+'creative' = ad
+    needs to put in queues where it gets approved (this is manual)
+    creative review / RMX
+    types of source queues (3):
+	risk
+	volume
+	fifo
+	spend
+	trading pit* (this one is the important one)
+	    how long was the creative waiting from time of submission to present?
+
+	    pending queue
+		creative - corresponding advertiser/agency
+	    reviewed
+	    network pending queue
+		network is a collection of advertisers
+	    12 hour rolling window 6am/6pm
+
+	    network > adv/agency > publisher
+
+
+seems like charity rick is the primary consumer of the data?
+
+requirements:
+    add second query per day (6am and 6pm, currently just once per day, jignesh uses 2+ cron jobs )
+    automated email of the excel sheet ( output is currently in csv format ) 
+	http://developer.corp.yahoo.com/topic/Email%20Sender%20Policy
+	
+    ask creative reviewer headless user info from vishnu
+
+

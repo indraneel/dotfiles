@@ -11,10 +11,8 @@ if [ $USER = "root" ]; then
 fi
 
 # Make symbolic links to this directory
-ln -fsn $PWD/bash_profile $HOME/.bash_profile
-ln -fsn $PWD/bashrc $HOME/.bashrc
-ln -fsn $PWD/bash_aliases $HOME/.bash_aliases
-ln -fsn $PWD/vim $HOME/.vim
-ln -fsn $PWD/vimrc $HOME/.vimrc
+for TARGET in .bashrc .bash_aliases .bash_profile .vimrc .vim; do
+    ln -s --force --no-dereference --verbose "$PWD/$TARGET" "$HOME/$TARGET"
+done
 
 #" vim: filetype=sh

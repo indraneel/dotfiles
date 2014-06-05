@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/.autofs/ilab/ilab_users/ip132/.vim/bundle'
+let g:netrw_dirhist_2='/.autofs/ilab/ilab_users/ip132/.vim'
+let g:netrw_dirhist_3='/.autofs/ilab/ilab_users/ip132'
+let g:netrw_dirhist_4='/Users/indraneelpurohit/dotfiles'
+let g:netrw_dirhist_5='/Users/indraneelpurohit/dotfiles/.vim/bundle'
+let g:netrw_dirhist_6='/Users/indraneelpurohit/dotfiles'
+let g:netrw_dirhist_7='/Users/ipurohit'
+let g:netrw_dirhist_8='/Users/ipurohit/.vim'
+let g:netrw_dirhist_9='/Users/ipurohit/dotfiles'

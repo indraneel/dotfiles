@@ -1,0 +1,35 @@
+- did a "how yahoo makes money" elearning thing
+- looked at yahoo tech talks
+- spoke with jignesh and went over the script he runs in a cron job
+- look up how to send email from unix
+	mail -s "subject" recipient@yahoo.com
+	cat file/containing/message | mail -s "subject" recipient@yahoo.com
+	uuencode file.jpeg file.jpeg | mail recipient@yahoo.com
+
+	mutt -s "subject" -a attachment.jpg recipient@yahoo.com < message_body.txt
+
+- finally met with venu!:
+    arity - manager uses the reports
+    team of people reviews the creatives in the queues
+
+    move the repot from emails to an on demand web ui 
+
+    look at the structure of the tables and understand the structure of the querieis
+    learn how to do what jignesh does manually
+    figure out a way to atuoamte from there
+    emberjs, appkit
+
+    1 week - learn what jignesh does
+    3 weeks - 2 days figuring out tech stack, 2 days figure out how to atumate
+
+    applicaitons are similar (they're all ember and appkit)
+
+    open an openstack vm, connect to 
+    
+    yo/openhouse => create openstack instances here
+    yo/github => internal github
+	ads-data
+
+- spun up an openstack instance on openhouse
+- set up ssh keys on mbp
+    - added keys to keykeeper and github
