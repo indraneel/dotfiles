@@ -1,6 +1,27 @@
-var nodemailer = require( "nodemailer" );
+var nodemailer = require( "nodemailer-noiconv" );
+var fs = require ( 'fs' );
 
-var smtpTransport = nodemailer.createTransport( "SMPT" , {
-    host: "smarthost.yahoo.com", //hostname
+nodemailer.SMTP = {
+    host: 'smarthost.yahoo.com'
+}
 
+fs.readFile("./Media_Guard_Queue_0605140600.xlsx", function ( err, data ) {
+    nodemailer.send_mail(
+	{
+	    sender: 'ipurohit@yahoo-inc.com',
+	    to: 'ipurohit@yahoo-inc.com',
+	    subject: 'test w. attachment!',
+	    body: 'hi there how are things? here\'s an attachment.',
+	    attachments: [
+		{
+		    filename: "Media_Guard_Queue_0605140600.xlsx",
+		    contents: data
+		}
+	    ]
+	},
+
+	function(error, success) {
+	    console.log('Message ' + success ? 'sent' : 'failed');
+	}
+    );
 });

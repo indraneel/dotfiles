@@ -64,3 +64,7 @@ rubus () {
 function tabname {
   printf "\e]1;$1\a"
 }
+
+cdfunc() {
+    cd $1 && ls
+}
