@@ -9,6 +9,7 @@ config:
 	ln $(LNFLAGS) $(PWD)/bash_aliases $(HOME)/.bash_aliases
 	ln $(LNFLAGS) $(PWD)/vim $(HOME)/.vim
 	ln $(LNFLAGS) $(PWD)/vimrc $(HOME)/.vimrc
+	ln $(LNFLAGS) $(PWD)/gitconfig $(HOME)/.gitconfig	
 
 clean:
 	rm $(RMFLAGS) $(HOME)/.bash_aliases
@@ -17,3 +18,4 @@ clean:
 	rm $(RMFLAGS) $(HOME)/.bashrc
 	rm $(RMFLAGS) $(HOME)/.vim
 	rm $(RMFLAGS) $(HOME)/.vimrc
+	rm $(RMFLAGS) $(HOME)/.gitconfig
