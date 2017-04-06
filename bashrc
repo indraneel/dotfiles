@@ -22,25 +22,17 @@ up(){
   cd $d
 }
 
-# Get information from NextBus courtesy V
-# Example: $ rubus rsc
-rubus () {
-    stop="$1$2$3"
-
-    if [ -z "$stop" ]; then
-        stop="hill"
-    fi
-
-    curl "http://vverma.net/nextbus/nextbus.php?android=1&s=$stop"
-}
-
 #change the tabname
 function tabname {
   printf "\e]1;$1\a"
 }
 
-cdfunc() {
+cdls() {
     cd $1 && ls
+}
+
+function git-jira-tix() {
+    git log $1 | grep -Eo '([A-Z]{2,}-)([0-9]+)' | uniq
 }
 
 function parse_git_branch {
