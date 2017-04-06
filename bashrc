@@ -32,7 +32,7 @@ cdls() {
 }
 
 function git-jira-tix() {
-    git log $1 | grep -Eo '([A-Z]{2,}-)([0-9]+)' | uniq
+    git log $1 | grep -Eo '([A-Z]{2,}-)([0-9]+)' | sort | uniq
 }
 
 function parse_git_branch {
