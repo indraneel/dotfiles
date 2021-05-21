@@ -5,4 +5,5 @@ alias lt='ls -la | grep "^d" && ls -la | grep "^-" && ls -la | grep "^l"'
 alias cdl=cdfunc
 alias pdflatex='pdflatex -interaction nonstopmode -file-line-error'
 alias reset="source $HOME/.bashrc && clear"
+alias jsonpp='json_pp -json_opt pretty,utf8'
 #" vim: filetype=sh
