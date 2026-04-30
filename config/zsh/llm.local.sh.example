@@ -1,0 +1,17 @@
+# llm.local.sh — per-machine LLM model selection.
+# Copy to ~/.config/zsh/llm.local.sh and edit. NOT committed (gitignored).
+# Anything exported here overrides defaults in qwen.sh / gpt-oss.sh / llm.sh.
+
+# Qwen via mlx_lm.server
+export QWEN_MODEL_PATH="$HOME/models/qwen3-8b"
+# export QWEN_PORT=1235
+# export QWEN_HOST=127.0.0.1
+
+# gpt-oss via Ollama
+export GPT_MODEL="gpt-oss-20b"
+# export GPT_PORT=11434
+# export GPT_KEEP_ALIVE=30m
+
+# claude-code-proxy
+# export CCP_DIR="$HOME/Code/claude-code-proxy"
+# export CCP_PORT=8082

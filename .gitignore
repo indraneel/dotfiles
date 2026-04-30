@@ -1,1 +1,13 @@
-.vim/backups/*
+# macOS
+.DS_Store
+
+# Vim swap/backup files (these can leak secrets if you've ever opened a
+# .env / .netrc / credentials file in vim while this dir was the backupdir)
+vim/backup/*
+!vim/backup/.gitkeep
+
+# Per-machine LLM model overrides — never commit
+config/zsh/llm.local.sh
+
+# Claude Code per-machine settings
+.claude/settings.local.json
