@@ -9,7 +9,8 @@ config:
 	ln $(LNFLAGS) $(PWD)/bash_aliases $(HOME)/.bash_aliases
 	ln $(LNFLAGS) $(PWD)/vim $(HOME)/.vim
 	ln $(LNFLAGS) $(PWD)/vimrc $(HOME)/.vimrc
-	ln $(LNFLAGS) $(PWD)/gitconfig $(HOME)/.gitconfig	
+	ln $(LNFLAGS) $(PWD)/gitconfig $(HOME)/.gitconfig
+	ln $(LNFLAGS) $(PWD)/.claude/statusline.sh $(HOME)/.claude/statusline.sh
 
 clean:
 	rm $(RMFLAGS) $(HOME)/.bash_aliases
@@ -19,3 +20,4 @@ clean:
 	rm $(RMFLAGS) $(HOME)/.vim
 	rm $(RMFLAGS) $(HOME)/.vimrc
 	rm $(RMFLAGS) $(HOME)/.gitconfig
+	rm $(RMFLAGS) $(HOME)/.claude/statusline.sh
