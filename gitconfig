@@ -3,7 +3,7 @@
   ci = commit
   st = status
   s = status
-  br = branch
+	br = "!f() {\n  live=\"%(if:equals=gone)%(upstream:track,nobracket)%(then)%(else)%(if)%(HEAD)%(then)* %(else)  %(end)%(refname:short)%(end)\";\n  gone=\"%(if:equals=gone)%(upstream:track,nobracket)%(then)  %(refname:short)%(end)\";\n  case \"$1\" in\n    --live) shift; git branch --format=\"$live\" \"$@\" | grep . ;;\n    --gone) shift; git branch --format=\"$gone\" \"$@\" | grep . ;;\n    *) git branch \"$@\" ;;\n  esac\n}; f"
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   type = cat-file -t
   dump = cat-file -p
