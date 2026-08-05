@@ -11,6 +11,22 @@ Treat the user's message that invoked `$fanout` as the task. If it supplies cont
 
 Treat explicit `$fanout` invocation as authorization to create and coordinate subagents for the requested task. Do not treat it as authorization for destructive actions, external writes, production changes, credential use, or any action outside the user's existing request. Give every worker the same authority boundary.
 
+## Know what fanout buys before dispatching
+
+Three separate benchmarks on this machine measured fanout against the same work done inline: a file inventory, a dependency trace, and a code review over a fixture with seeded defects. In every run, fanout cost 3–10× the tokens and returned the same accuracy. No arm, fanned out or inline, at any reasoning effort, found a defect the others missed.
+
+Fanout does not buy correctness. It buys parent-thread context, in proportion to how much each slice compresses before it reports back. Apply the compression test: will each worker read far more than it reports?
+
+| Each worker | Fanout buys | Action |
+|---|---|---|
+| Reads a large surface and reports a short verdict, such as "which of these twelve modules touch auth" | A real context saving | Fan out |
+| Reads a large surface and reports proportionally, such as inventorying every file or tracing every hop | 5–18% of the parent window | State this in one sentence and dispatch as asked |
+| Requires a finding that a sibling worker holds | Nothing, because workers cannot exchange context | Reshape the slices, or state that inline work fits better |
+
+When compression is low, tell the user in one sentence that inline work at high reasoning effort matched fanout in the benchmark at a fraction of the tokens. Then dispatch what the user asked for. The user invoked `$fanout`; this is a note, not a veto.
+
+Wall-clock speed is not an established reason to fan out. In the code-review benchmark the fanned-out arms were slower than every inline arm, though limited concurrent slots make that timing pessimistic. Claim a latency benefit only when the available slots let every worker run at once.
+
 ## Decide the dispatch
 
 Honor each explicit control exactly when the collaboration API supports it:
@@ -21,16 +37,17 @@ Honor each explicit control exactly when the collaboration API supports it:
 - If a requested count exceeds the available concurrent slots, state the limit and run the requested total in waves as slots become available.
 - If a requested count does not match the natural seams, say so in one sentence and still dispatch the requested total. Give surplus workers distinct verification or adversarial-review scopes instead of overlapping implementation scopes.
 
-When the user omits a control, infer it from each slice:
+When the user omits a control, apply these defaults:
 
-| Slice | Model class | Reasoning effort |
+| Control | Default | Reason |
 |---|---|---|
-| Locate, list, extract, or restate | Lightest suitable available model | `low` |
-| Read one area and summarize | Balanced available model | `medium` |
-| Trace across files or weigh a design decision | Strongest suitable available model | `high` |
-| Verify a contested finding or perform adversarial review | Strongest suitable available model | `xhigh` |
+| Worker model class | Strongest suitable available model | Weaker models iterate — the lightest model tested needed 71 tool calls where the strongest needed 35, spending roughly 1.8× the tokens |
+| Worker reasoning effort | `medium` | Measured flat from `low` to `xhigh`; raising it buys output, not accuracy |
+| Your own reasoning effort when merging | `high` or above | Effort pays where one agent holds the whole problem |
 
-Use `max` only when the user asks for it. Omit a model override when the available API does not expose a justified choice.
+Spend the reasoning-effort budget on yourself rather than on the workers. The token figures above are **raw counts, not costs** — per-token prices differ by model class and again between agent products, so apply current rates before stating any conclusion about spend.
+
+Honor an explicitly requested tier exactly. These defaults record a measurement, not a veto. Use `max` only when the user asks for it. Omit a model override when the available API does not expose a justified choice.
 
 Set the worker count to the number of genuinely independent slices when the user omits it. If the seams are unclear, either split by known layers or send one discovery worker first, then dispatch the discovered slices.
 

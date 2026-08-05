@@ -17,6 +17,28 @@ and stop.
 Everything below is a standing instruction for the rest of this task, not a one-time
 checklist.
 
+## What fanout actually buys
+
+Measured three times on this machine — an inventory task, a dependency trace, and a
+seeded-defect code review. In every run, **fanout cost
+3–10× the tokens of the same work done inline and returned the same accuracy.** No arm,
+fanned out or inline, at any effort, found something the others missed.
+
+Fanout does not buy accuracy. It buys main-thread context, in proportion to how much
+each slice compresses on the way back.
+
+**The compression test — will each worker read far more than it reports?**
+
+| Each worker | Fanout buys | Do |
+|---|---|---|
+| Reads a lot, reports a little — *"which of these 12 modules touch auth?"* | Real context saving | Fan out |
+| Reads a lot, reports proportionally — inventory every file, trace every hop | 5–18% of window | Say so, dispatch as asked |
+| Needs what a sibling found | Nothing; workers cannot talk | Reshape the slices, or say inline fits better |
+
+When compression is low, tell the user in one sentence — *"inline at high effort matched
+this in the benchmark at roughly a sixth of the tokens"* — and dispatch what they asked
+for anyway. They typed `/fanout`. This is a note, not a veto.
+
 ## The knob that does not exist
 
 The Agent tool accepts `prompt`, `subagent_type`, `model`, `isolation`, `description`.
@@ -59,18 +81,22 @@ Honor anything stated, exactly: `6 agents`, `on opus`, `at xhigh effort`, `in wo
 `read-only`, `haiku`. If a stated count looks wrong for the seams in the work, say so in
 one sentence and dispatch what was asked anyway.
 
-Infer the rest from the slice, not the session:
+### Model and effort
 
-| Slice work | Model | Effort |
+When the user omits a control:
+
+| | Default | Why |
 |---|---|---|
-| Locate, list, extract, restate | haiku | low |
-| Read one area and summarize | sonnet | medium |
-| Trace across files, weigh a design call | opus | high |
-| Verify a contested finding, adversarial review | opus | xhigh |
-| — | | `max` only when asked |
+| Worker model | strongest available | Weak models iterate — haiku spent 71 tool calls to opus's 35 on the same slices, ~1.8× the tokens |
+| Worker effort | `medium` | Measured flat from `low` to `xhigh`; raising it buys output, not accuracy |
+| Your own effort, merging | `high` or above | Effort pays where one agent holds the whole problem |
 
-`${CLAUDE_EFFORT}` is the fallback when no row clearly fits — not an automatic answer,
-since a slice is usually narrower than the session's own work.
+Spend the effort knob on yourself, not the workers. Token counts above are not dollars —
+per-token prices differ by model class.
+
+Honor an explicitly requested tier exactly; these are defaults, not vetoes. Use `max`
+only when asked. `${CLAUDE_EFFORT}` is not an automatic answer: a slice is usually
+narrower than the session's own work.
 
 **Count = the number of genuinely independent slices.** Not a round number. Three real
 seams means three workers even if the phrasing suggested more. When the seams are not
@@ -122,7 +148,10 @@ Read every return before writing a word of synthesis. Then:
 |---|---|
 | Answering without saying what you dispatched | Open the answer with the record line |
 | Dropping effort because the tool has no parameter | `subagent_type: fanout-<effort>` |
-| Defaulting every worker to the session effort | Choose from the slice's row |
+| Spending `xhigh` on workers to buy accuracy | Measured flat across four tiers — default `medium`, spend the effort on your merge |
+| Fanning out a low-compression task without a word | Dispatch as asked, but say inline would match it |
+| Reaching for a cheap model to save tokens | Weak models spend *more* tokens here — they iterate |
+| Quoting a token ratio as a cost ratio | Prices differ by model class — say "tokens" unless you priced it |
 | Padding to hit a requested count | Say the seams don't support it, dispatch as asked |
 | Slices that overlap | Give each worker explicit negative scope |
 | Stating your hypothesis as fact in the prompt | Label it, ask for confirm-or-correct |
