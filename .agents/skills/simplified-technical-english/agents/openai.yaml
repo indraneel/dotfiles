@@ -1,0 +1,4 @@
+interface:
+  display_name: "Simplified Technical English"
+  short_description: "Write clear Simplified Technical English"
+  default_prompt: "Use $simplified-technical-english to rewrite this technical content for a global audience."
