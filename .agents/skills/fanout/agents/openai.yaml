@@ -1,0 +1,6 @@
+interface:
+  display_name: "Fanout"
+  short_description: "Fan out work across controlled parallel agents"
+  default_prompt: "Use $fanout to split this task into independent parallel slices and merge the verified results."
+policy:
+  allow_implicit_invocation: false
