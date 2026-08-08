@@ -1,7 +1,11 @@
 # zshrc — interactive zsh config
 
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+export NVM_DIR="$HOME/.nvm"
+# Lazy-load nvm: the first call to any of these replaces the shims with the real thing
+for cmd in nvm node npm npx; do
+  eval "$cmd() { unset -f nvm node npm npx; . \"\$NVM_DIR/nvm.sh\"; [ -s \"\$NVM_DIR/bash_completion\" ] && . \"\$NVM_DIR/bash_completion\"; $cmd \"\$@\"; }"
+done
+unset cmd
 
 up() {
   local d=""
